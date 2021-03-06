@@ -1,0 +1,11 @@
+---
+  - name: Main Play
+    hosts: all
+    gather_facts: "{{ facts }}"
+    vars_files:
+     - ../variables/main_vars.yml
+    tasks:
+      - include: ../tasks/ping.yml
+      - include: ../tasks/bootstrap.yml
+      - include: ../tasks/webserver_packages.yml
+      - include: ../tasks/database_packages.yml

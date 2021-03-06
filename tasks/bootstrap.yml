@@ -1,0 +1,23 @@
+- name: Update Packages on Webserver
+  when: ansible_facts['hostname'] == "webserver"
+  yum:
+    name: "*"
+    state: latest
+
+- name: Install packages on Webserver
+  when: ansible_facts['hostname'] == "webserver"
+  yum:
+    name: "{{ bootstrap_packages }}"
+    state: latest
+
+- name: Update Packages on Database
+  when: ansible_facts['hostname'] == "database1"
+  apt:
+    name: "*"
+    state: latest
+
+- name: Install packages on Database
+  when: ansible_facts['hostname'] == "database1"
+  apt:
+    name: "{{ bootstrap_packages }}"
+    state: latest
