@@ -36,3 +36,19 @@
    name: "{{ php_package }}"
    state: present
    enablerepo: "remi-*,epel,base"
+
+- name: Download Wordpress - unarchive
+  when: ansible_facts['hostname'] == "webserver"
+  unarchive:
+    src: https://wordpress.org/latest.tar.gz
+    dest: /tmp/
+    remote_src: yes
+
+- name: Copy Wordpress filles to /var/www/html
+  when: ansible_facts['hostname'] == "webserver"
+  copy:
+    src: /tmp/wordpress/
+    dest: /var/www/html/
+    remote_src: yes
+    owner: apache
+    group: apache
