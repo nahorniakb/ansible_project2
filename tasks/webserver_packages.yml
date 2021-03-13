@@ -20,8 +20,8 @@
   when: ansible_facts['hostname'] == "webserver"
   yum_repository:
     description: Extra Packages for Enterprise Linux 7 - $basearch
-    metalink: https://mirrors.fedoraproject.org/metalink?repo=epel-7&arch=$basearch
-    name: remi-php72
+    mirrorlist: http://cdn.remirepo.net/enterprise/7/php73/mirror
+    name: remi-php73
     enabled: yes
 
 - name: Update Repository on Webserver
@@ -30,7 +30,7 @@
     name: "*"
     state: latest
 
-- name: Install PHP7.2
+- name: Install PHP7.3
   when: ansible_facts['hostname'] == "webserver"
   yum:
    name: "{{ php_package }}"

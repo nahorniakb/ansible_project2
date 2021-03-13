@@ -1,0 +1,6 @@
+- name:
+  when: ansible_facts['hostname'] == "webserver"
+  systemd:
+    name: httpd
+    state: started
+    enabled: yes
